@@ -1,0 +1,94 @@
+[*]
+[*] GTKWave Analyzer v3.3.61 (w)1999-2014 BSI
+[*] Thu Oct 10 18:40:12 2024
+[*]
+[dumpfile] "/nfs_scratch/scratch/FV/ayyaz/RSICV_Pipelined_CPU/dump.vcd"
+[dumpfile_mtime] "Thu Oct 10 18:36:48 2024"
+[dumpfile_size] 16411
+[savefile] "/nfs_scratch/scratch/FV/ayyaz/RSICV_Pipelined_CPU/Pipeline.vcd.gtkw"
+[timestart] 0
+[size] 1366 721
+[pos] -1 -1
+*-7.899462 350 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] Pipeline_tb.
+[sst_width] 234
+[signals_width] 274
+[sst_expanded] 1
+[sst_vpaned_height] 198
+@800200
+-Global Inputs
+@28
+Pipeline_tb.clk
+Pipeline_tb.rst
+@1000200
+-Global Inputs
+@800200
+-FETCH
+@28
+Pipeline_tb.CPU.PCSrcE
+@22
+Pipeline_tb.CPU.PCD[31:0]
+Pipeline_tb.CPU.PCTargetE[31:0]
+@23
+Pipeline_tb.CPU.InstrD[31:0]
+@22
+Pipeline_tb.CPU.PCPlus4D[31:0]
+@1000200
+-FETCH
+@800200
+-DECODE
+@22
+Pipeline_tb.CPU.PCE[31:0]
+Pipeline_tb.CPU.PCPlus4E[31:0]
+Pipeline_tb.CPU.RD_E[4:0]
+@28
+Pipeline_tb.CPU.ALUControlE[2:0]
+Pipeline_tb.CPU.ALUSrcE
+Pipeline_tb.CPU.BranchE
+Pipeline_tb.CPU.MemWriteE
+Pipeline_tb.CPU.RegWriteE
+Pipeline_tb.CPU.ResultSrcE[1:0]
+Pipeline_tb.CPU.JumpE
+@22
+Pipeline_tb.CPU.RD1_E[31:0]
+Pipeline_tb.CPU.RD2_E[31:0]
+Pipeline_tb.CPU.Imm_Ext_E[31:0]
+@1000200
+-DECODE
+@800200
+-EXECUTE
+@22
+Pipeline_tb.CPU.PCPlus4M[31:0]
+Pipeline_tb.CPU.RD_M[4:0]
+@28
+Pipeline_tb.CPU.MemWriteM
+Pipeline_tb.CPU.RegWriteM
+Pipeline_tb.CPU.ResultSrcM[1:0]
+@22
+Pipeline_tb.CPU.ALU_ResultM[31:0]
+Pipeline_tb.CPU.WriteDataM[31:0]
+@1000200
+-EXECUTE
+@800200
+-MEMORY
+@22
+Pipeline_tb.CPU.ALU_ResultW[31:0]
+Pipeline_tb.CPU.PCPlus4W[31:0]
+Pipeline_tb.CPU.ReadDataW[31:0]
+@28
+Pipeline_tb.CPU.RegWriteW
+@1000200
+-MEMORY
+@800200
+-Register WriteBack
+@28
+Pipeline_tb.CPU.RegWriteW
+@22
+Pipeline_tb.CPU.RDW[4:0]
+Pipeline_tb.CPU.ResultW[31:0]
+@1000200
+-Register WriteBack
+@200
+-
+[pattern_trace] 1
+[pattern_trace] 0
