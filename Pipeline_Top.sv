@@ -19,12 +19,13 @@ wire [31:0] RD1_E, RD2_E ,Imm_Ext_E;
 wire [31:0] PCE,PCPlus4E,PCPlus4M,PCPlus4W,ALU_ResultM,WriteDataM;
 wire [31:0] ReadDataW,ALU_ResultW;
 wire [1:0] ForwardAE,ForwardBE;
-wire FlushE, StallD, StallF;
+wire FlushE, StallD, StallF, FlushD;
 
 fetch_cycle Fetch_Stage(.clk(clk),
                         .rst(rst),
                         .StallF(StallF),
                         .StallD(StallD),
+                        .FlushD(FlushD),
                         .PCSrcE(PCSrcE), 
                         .PCTargetE(PCTargetE),
                         .InstrD(InstrD),
@@ -117,6 +118,8 @@ hazard_unit Forwarding_Block(
                             .RS1_D(InstrD[19:15]), 
                             .RS2_D(InstrD[24:20]), 
                             .RD_E(RD_E),
+                            .PCSrcE(PCSrcE),
+                            .FlushD(FlushD),
                             .FlushE(FlushE),
                             .StallD(StallD),
                             .StallF(StallF)

@@ -2,8 +2,8 @@
 `include "instr_mem.sv"
 `include "pc.sv"
 `include "mux2x1.sv"
-module fetch_cycle(clk, rst, StallF, StallD,PCSrcE, PCTargetE, InstrD,PCD,PCPlus4D);
-input clk,rst,StallF,StallD;
+module fetch_cycle(clk, rst, StallF,FlushD ,StallD,PCSrcE, PCTargetE, InstrD,PCD,PCPlus4D);
+input clk,rst,StallF,StallD,FlushD;
 input PCSrcE;
 input [31:0] PCTargetE;
 output [31:0] InstrD, PCD, PCPlus4D;
@@ -28,7 +28,7 @@ PC_Adder PCAdder(.a(PCF),.b(32'd4),.c(PCPlus4F));
 
 // Fetch Cycle Register Logic
 always @(posedge clk or negedge rst)begin
-    if(~rst)begin
+    if(~rst | FlushD)begin
         InstrF_reg<= 32'd0;
         PCF_reg <= 32'd0;
         PCPlus4F_reg <= 32'd0;
