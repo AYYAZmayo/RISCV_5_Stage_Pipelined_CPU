@@ -3,10 +3,10 @@
  `include "sign_extend.sv"
 
 
-module Decode_Cycle(clk,rst,InstrD, PCD, PCPlus4D, RegWriteW, RDW, ResultW, RegWriteE,
+module Decode_Cycle(clk,rst,FlushE,InstrD, PCD, PCPlus4D, RegWriteW, RDW, ResultW, RegWriteE,
 ALUSrcE,MemWriteE,ResultSrcE,BranchE, JumpE,ALUControlE,RD1_E,RD2_E ,Imm_Ext_E,RD_E,PCE,PCPlus4E,
 RS1_E, RS2_E);
-input clk,rst,RegWriteW;
+input clk,rst,RegWriteW,FlushE;
 input [4:0] RDW;
 input [31:0] InstrD, PCD, PCPlus4D,ResultW;
 
@@ -67,7 +67,7 @@ sign_extend SignExtend(
 
 
 always @(posedge clk or negedge rst)begin
-    if(rst==1'b0)begin
+    if(rst==1'b0 | FlushE == 1'b1)begin
         RegWriteD_r <= 1'b0;
         ALUControlD_r <=3'b000;
         ALUSrcD_r<= 1'b0;

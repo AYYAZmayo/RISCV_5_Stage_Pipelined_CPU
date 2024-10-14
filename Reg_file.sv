@@ -9,7 +9,7 @@ output [31:0] RD1,RD2
 
 );
 reg [31:0] regfile[31:1];
-always @(posedge clk)begin
+always @(negedge clk)begin
 		if (WE3)
 			regfile[A3]<= WD3;
 end
@@ -18,8 +18,11 @@ assign RD2 = (~rst)? 32'd0 :(A2==0) ? 'b0: regfile[A2];
 
 initial
 	begin
-		regfile[9]=32'h00000020;
-		//regfile[6]=32'h00000040;
+		regfile[9] =32'h00000020;
+		regfile[28]=32'h0000000F;
+		regfile[22]=32'h00000001;
+		regfile[18]=32'h00000001;
+		regfile[23]=32'h0000000A;
 	end
 
 

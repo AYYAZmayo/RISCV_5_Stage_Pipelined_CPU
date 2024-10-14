@@ -18,10 +18,13 @@ wire [31:0] PCTargetE,InstrD,PCD,PCPlus4D,ResultW;
 wire [31:0] RD1_E, RD2_E ,Imm_Ext_E;
 wire [31:0] PCE,PCPlus4E,PCPlus4M,PCPlus4W,ALU_ResultM,WriteDataM;
 wire [31:0] ReadDataW,ALU_ResultW;
-wire [1:0]ForwardAE,ForwardBE;
+wire [1:0] ForwardAE,ForwardBE;
+wire FlushE, StallD, StallF;
 
 fetch_cycle Fetch_Stage(.clk(clk),
                         .rst(rst),
+                        .StallF(StallF),
+                        .StallD(StallD),
                         .PCSrcE(PCSrcE), 
                         .PCTargetE(PCTargetE),
                         .InstrD(InstrD),
@@ -31,6 +34,7 @@ fetch_cycle Fetch_Stage(.clk(clk),
 
 Decode_Cycle Decode_Stage(.clk(clk),
                           .rst(rst),
+                          .FlushE(FlushE),
                           .InstrD(InstrD),
                           .PCD(PCD),
                           .PCPlus4D(PCPlus4D),
@@ -108,7 +112,14 @@ hazard_unit Forwarding_Block(
                             .RS1_E(RS1_E),
                             .RS2_E(RS2_E),
                             .ForwardAE(ForwardAE),
-                            .ForwardBE(ForwardBE)
+                            .ForwardBE(ForwardBE),
+                            .ResultSrcE0(ResultSrcE[0]),
+                            .RS1_D(InstrD[19:15]), 
+                            .RS2_D(InstrD[24:20]), 
+                            .RD_E(RD_E),
+                            .FlushE(FlushE),
+                            .StallD(StallD),
+                            .StallF(StallF)
                             );
 WriteBack_Cycle WriteBack_Stage(.clk(clk),
                                 .rst(rst), 

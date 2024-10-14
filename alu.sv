@@ -12,7 +12,7 @@ wire [n-1:0]mux1;
 
 
 assign mux1= ALUControl[0]? ~B: B;
-assign {cout,sum} = A+mux1;
+assign {cout,sum} = A+ mux1 + ALUControl[0];
 assign AandB = (A & B);
 assign AorB = (A | B);
 

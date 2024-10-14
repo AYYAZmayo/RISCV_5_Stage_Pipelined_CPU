@@ -18,5 +18,6 @@ initial begin
 	for(i=0; i<1024 ; i=i+1)begin
 		d_mem[i] =32'h00000000;
 	end
+	d_mem[41] =32'h0000000A;
 end
 endmodule

@@ -2,8 +2,8 @@
 `include "instr_mem.sv"
 `include "pc.sv"
 `include "mux2x1.sv"
-module fetch_cycle(clk, rst, PCSrcE, PCTargetE, InstrD,PCD,PCPlus4D);
-input clk,rst;
+module fetch_cycle(clk, rst, StallF, StallD,PCSrcE, PCTargetE, InstrD,PCD,PCPlus4D);
+input clk,rst,StallF,StallD;
 input PCSrcE;
 input [31:0] PCTargetE;
 output [31:0] InstrD, PCD, PCPlus4D;
@@ -18,7 +18,7 @@ reg [31:0] InstrF_reg , PCF_reg, PCPlus4F_reg;
 Mux2x1 PC_MUX(.a(PCPlus4F),.b(PCTargetE),.s(PCSrcE),.y(PC_F));
 
 // PC Counter
-P_C programm_counter(.PC_NEXT(PC_F), .PC(PCF), .rst(rst), .clk(clk));
+P_C programm_counter(.PC_NEXT(PC_F), .PC(PCF), .rst(rst),.En(StallF) ,.clk(clk));
 
 // Instruction Memory
 Instr_mem IMEM(.A(PCF),.rst(rst),.RD(InstrF));
@@ -34,9 +34,11 @@ always @(posedge clk or negedge rst)begin
         PCPlus4F_reg <= 32'd0;
     end
     else begin
-        InstrF_reg<= InstrF;
-        PCF_reg <= PCF;
-        PCPlus4F_reg <= PCPlus4F;
+        if(~StallD) begin
+            InstrF_reg<= InstrF;
+            PCF_reg <= PCF;
+            PCPlus4F_reg <= PCPlus4F;
+        end
     end
 end
 
